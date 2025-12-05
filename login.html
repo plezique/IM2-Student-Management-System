@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduVault | Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #161616 0%, #0a0a0a 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #fff;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Animated Grid Background */
+    .grid-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: 
+        linear-gradient(rgba(0, 255, 136, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 30s linear infinite;
+      pointer-events: none;
+      will-change: transform;
+      z-index: 0;
+    }
+    @keyframes gridMove {
+      0% { transform: translate(0, 0);}
+      100% { transform: translate(60px, 60px);}
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #00ff88;
+      animation: twinkle 3s ease-in-out infinite;
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1);}
+      50% { opacity: 1; transform: scale(1.5);}
+    }
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      background: rgba(30, 32, 36, 0.98);
+      border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(0,255,136,0.13), 0 8px 32px rgba(0,0,0,0.45);
+      padding: 3rem 2.5rem 2.5rem 2.5rem;
+      max-width: 440px;
+      width: 100%;
+      position: relative;
+      transition: box-shadow 0.2s;
+      border: 2px solid rgba(0,255,136,0.13);
+      backdrop-filter: blur(3px);
+      animation: fadeInCard 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .fade-in { animation: fadeInCard 0.7s cubic-bezier(.4,0,.2,1);}
+    .pill {
+      background: linear-gradient(90deg, #00ff88 0%, #33ff99 100%);
+      color: #161616;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.45rem 1.3rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 1.3rem;
+      letter-spacing: 0.04em;
+      box-shadow: 0 2px 12px rgba(0,255,136,0.13);
+      border: 1px solid #00ff88;
+      text-shadow: 0 1px 8px #00ff8855;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.03em;
+      text-shadow: 0 1px 10px #00ff8833;
+    }
+    .card .subtitle {
+      text-align: center;
+      color: #b3ffdd;
+      font-size: 1.13rem;
+      margin-bottom: 1.7rem;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+      text-shadow: 0 1px 8px #00ff8822;
+    }
+    form#loginForm {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+    label {
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+      display: block;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 0.2rem;
+    }
+    input[type="email"], input[type="password"], .form-control {
+      width: 100%;
+      padding: 0.8rem 1.1rem;
+      border-radius: 12px;
+      border: none;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      font-size: 1.07rem;
+      margin-top: 0.1rem;
+      outline: none;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 6px rgba(0,255,136,0.08);
+      border: 1.5px solid transparent;
+    }
+    input:focus {
+      background: rgba(0,255,136,0.13);
+      border: 1.5px solid #00ff88;
+      box-shadow: 0 0 0 2px #00ff8855;
+    }
+    .btn.btn-primary {
+      background: linear-gradient(90deg, #00ff88 0%, #33ff99 100%);
+      color: #161616;
+      font-weight: 700;
+      font-size: 1.13rem;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 0;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 2px 16px rgba(0,255,136,0.15);
+      transition: background 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.03em;
+    }
+    .btn.btn-primary:hover {
+      background: linear-gradient(90deg, #00e676 0%, #00ff88 100%);
+      box-shadow: 0 4px 24px #00ff8833;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 1.3rem 0 1.2rem 0;
+      color: #b3b3b3;
+      font-size: 1.05rem;
+      font-weight: 600;
+      opacity: 0.85;
+      letter-spacing: 0.02em;
+    }
+    .divider hr {
+      flex: 1;
+      border: none;
+      border-top: 2px solid rgba(255,255,255,0.15);
+      margin: 0;
+    }
+    .google-btn {
+      width: 100%;
+      background: #fff;
+      color: #161616;
+      font-weight: 700;
+      font-size: 1.13rem;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 0;
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 16px rgba(0,255,136,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      transition: background 0.18s, box-shadow 0.18s;
+      border: 1.5px solid #00ff88;
+    }
+    .google-btn:hover {
+      background: #e6ffe6;
+      box-shadow: 0 4px 24px #00ff8833;
+    }
+    .signup-link {
+      text-align: center;
+      color: #b3b3b3;
+      font-size: 1.05rem;
+      margin-top: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+    .signup-link a {
+      color: #00ff88;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.18s;
+      padding: 0 0.2em;
+      border-bottom: 1.5px dotted #00ff88;
+    }
+    .signup-link a:hover {
+      color: #33ff99;
+      text-decoration: underline;
+      border-bottom: 2px solid #33ff99;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.65);
+      align-items: center;
+      justify-content: center;
+      animation: fadeInModal 0.3s;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    .student-details {
+      background: rgba(30,32,36,0.98);
+      border-radius: 22px;
+      box-shadow: 0 12px 40px rgba(0,255,136,0.13), 0 8px 32px rgba(0,0,0,0.45);
+      padding: 2.7rem 2.2rem 2rem 2.2rem;
+      min-width: 340px;
+      max-width: 370px;
+      width: 100%;
+      position: relative;
+      border: 2px solid rgba(0,255,136,0.13);
+      animation: fadeInCard 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .info-item {
+      margin-bottom: 1.2rem;
+    }
+    .form-label {
+      color: #b3b3b3;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+      display: block;
+      font-weight: 600;
+    }
+    .form-control {
+      padding: 0.8rem 1.1rem;
+      border-radius: 12px;
+      border: none;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      font-size: 1.07rem;
+      outline: none;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 6px rgba(0,255,136,0.08);
+      border: 1.5px solid transparent;
+    }
+    .form-control:focus {
+      background: rgba(0,255,136,0.13);
+      border: 1.5px solid #00ff88;
+      box-shadow: 0 0 0 2px #00ff8855;
+    }
+    .btn-submit {
+      background: linear-gradient(90deg, #00ff88 0%, #33ff99 100%);
+      color: #161616;
+      font-weight: 700;
+      font-size: 1.13rem;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 0;
+      cursor: pointer;
+      box-shadow: 0 2px 16px rgba(0,255,136,0.15);
+      transition: background 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.03em;
+      margin-top: 10px;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(90deg, #00e676 0%, #00ff88 100%);
+      box-shadow: 0 4px 24px #00ff8833;
+    }
+    #closeSignup {
+      margin-top: 18px;
+      width: 100%;
+      padding: 0.8rem;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: white;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      transition: background 0.18s, border 0.18s;
+    }
+    #closeSignup:hover {
+      background: rgba(0,255,136,0.08);
+      border: 2px solid #00ff88;
+      color: #00ff88;
+    }
+    @media (max-width: 600px) {
+      .card, .student-details {
+        padding: 1.5rem 0.7rem;
+        max-width: 98vw;
+      }
+      .logo-row span {
+        font-size: 1.2rem !important;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+    }
+    /* Add subtle glassmorphism effect */
+    .card, .student-details {
+      backdrop-filter: blur(6px) brightness(1.05);
+      border: 2px solid rgba(0,255,136,0.13);
+    }
+    /* Add icon to password field */
+    .input-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #00ff88;
+      font-size: 1.2rem;
+      opacity: 0.7;
+      cursor: pointer;
+
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <div class="grid-background"></div>
+  <script>
+    for (let i = 0; i < 25; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.width = Math.random() * 4 + 2 + "px";
+      star.style.height = star.style.width;
+      star.style.top = Math.random() * 100 + "vh";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.animationDelay = Math.random() * 3 + "s";
+      document.body.appendChild(star);
+    }
+  </script>
+  <div class="wrapper">
+    <div id="header"></div>
+    <main class="section">
+      <div class="container" style="max-width:520px;">
+        <div class="card fade-in">
+
+          <!-- 1. Secure access -->
+          <div class="pill"><i class="fa fa-lock" style="margin-right:8px;"></i>Secure access</div>
+
+          <!-- 2. EduVault Logo & Title -->
+          <div class="logo-row">
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNjE2MTY7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTBhMGE7c3RvcC1vcGFjaXR5OjEiLz48L3JhZGlhbEdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYWNjIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBmZjg4O3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMzNmZjk5O3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTUiIGZpbGw9InVybCgjYmcpIiBzdHJva2U9InVybCgjYWNjKSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjMiIGZpbGw9InVybCgjYWNjKSIgb3BhY2l0eT0iMC45Ii8+PGcgc3Ryb2tlPSJ1cmwoI2FjYykiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMTYgMTMgTDE2IDggTTEzIDE2IEw4IDE2IE0xOSAxNiBMMjQgMTYgTTE2IDE5IEwxNiAyNCIgb3BhY2l0eT0iMC44Ii8+PHBhdGggZD0iTTE4LjUgMTMuNSBMMjIgMTAgTTE4LjUgMTguNSBMMjIgMjIgTTEzLjUgMTMuNSBMMTAgMTAiIG9wYWNpdHk9IjAuNiIvPjwvZz48ZyBmaWxsPSJ1cmwoI2FjYykiIG9wYWNpdHk9IjAuNyI+PGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSIxLjUiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMjQiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiLz48Y2lyY2xlIGN4PSIyMiIgY3k9IjIyIiByPSIxIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIvPjwvZz48L3N2Zz4=" alt="EduVault Logo" style="width:28px; height:28px;">
+            <span style="font-size:1.7rem; font-weight:800; color:#fff; line-height:1;">
+              <span style="color:#00ff88;">Edu</span>Vault
+            </span>
+          </div>
+
+          <!-- 3. Login to your account -->
+          <h1>LOGIN TO YOUR ACCOUNT</h1>
+          <div class="subtitle">
+            Student Management Made Simple
+          </div>
+
+            <!-- 4. Email/Password Form -->
+            <form id="loginForm">
+            <div class="input-group">
+              <label for="email">
+              <span style="margin-right:6px; color:#00ff88;">
+              <i class="fa fa-envelope"></i>
+              </span>
+              Email
+              </label>
+              <input id="email" name="email" type="email" placeholder="insert your email" required>
+            </div>
+            <div class="input-group" style="position:relative;">
+              <label for="password">
+              <span style="margin-right:6px; color:#00ff88;">
+              <i class="fa fa-key"></i>
+              </span>
+              Password
+              <input id="password" name="password" type="password" placeholder="insert your password" required>
+              <span class="input-icon" id="togglePassword">
+                <i class="fa fa-eye"></i>
+              </span>
+              </span>
+            </div>
+            <button class="btn btn-primary" type="submit">
+              <i class="fa fa-sign-in-alt" style="margin-right:7px;"></i> Login
+            </button>
+            </form>
+            <script>
+              const passwordInput = document.getElementById('password');
+              const togglePassword = document.getElementById('togglePassword');
+              togglePassword.addEventListener('click', function() {
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+                togglePassword.innerHTML = type === 'password'
+                  ? '<i class="fa fa-eye"></i>'
+                  : '<i class="fa fa-eye-slash"></i>';
+              });
+            </script>
+
+          <!-- 5. Divider -->
+          <div class="divider">
+            <hr>
+            <span>or</span>
+            <hr>
+          </div>
+
+          <!-- 6. Google login button -->
+          <button type="button" class="google-btn" aria-label="Continue with Google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" style="width:22px; height:22px; vertical-align:middle;">
+            Sign in with Google
+          </button>
+
+          <!-- 7. Create account link -->
+          <p class="signup-link">
+            Don't have an account?
+            <a href="#" id="openSignup"><i class="fa fa-user-plus"></i> Create account</a>
+          </p>
+        </div>
+      </div>
+    </main>
+    <div id="footer"></div>
+  </div>
+
+  <!-- SIGN-UP MODAL -->
+  <div id="signupModal" class="modal">
+    <div class="student-details">
+      <h3 style="color:#00ff88; margin-bottom:1rem; text-align:center;"><i class="fa fa-user-plus"></i> Create an Account</h3>
+      <form id="signupForm">
+        <div class="info-item input-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" required>
+          <span class="input-icon"><i class="fa fa-user"></i></span>
+        </div>
+        <div class="info-item input-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" required>
+          <span class="input-icon"><i class="fa fa-envelope"></i></span>
+        </div>
+        <div class="info-item input-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" required>
+          <span class="input-icon"><i class="fa fa-key"></i></span>
+        </div>
+        <button type="submit" class="btn-submit" style="width:100%;">
+          <i class="fa fa-user-plus"></i> Create Account
+        </button>
+      </form>
+      <button id="closeSignup">
+        <i class="fa fa-times"></i> Cancel
+      </button>
+    </div>
+  </div>
+  <script>
+    document.getElementById("openSignup").onclick = () => {
+      document.getElementById("signupModal").style.display = "flex";
+    };
+    document.getElementById("closeSignup").onclick = () => {
+      document.getElementById("signupModal").style.display = "none";
+    };
+  </script>
+  <script src="js/logs.js"></script>
+  <script src="js/protect.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
