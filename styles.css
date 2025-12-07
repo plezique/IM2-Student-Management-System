@@ -538,6 +538,79 @@ body {
     padding: 1.5rem;
 }
 
+/* Delete Confirmation Modal */
+.delete-modal-content {
+    background: #0a0a0a;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    border-radius: 16px;
+}
+
+.delete-modal-header {
+    background: rgba(239, 68, 68, 0.15);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 1.5rem;
+}
+
+.delete-modal-header .modal-title {
+    color: #ef4444;
+}
+
+.delete-modal-body {
+    padding: 1.5rem;
+    color: #ffffff;
+}
+
+.delete-modal-body p {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.delete-modal-footer {
+    border-top: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.btn-cancel-delete {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel-delete:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+.btn-confirm-delete {
+    background: #ef4444;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-confirm-delete:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn-close-white {
+    filter: invert(1) brightness(0.8);
+}
+
 .form-label {
     color: #ffffff;
     font-weight: 600;
@@ -575,6 +648,12 @@ body {
 
 .form-control::placeholder {
     color: #6b7280;
+}
+
+.text-muted {
+    color: #6b7280 !important;
+    font-size: 0.85rem;
+    font-weight: 400;
 }
 
 .form-select option {

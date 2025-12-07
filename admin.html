@@ -93,14 +93,21 @@
                     <div id="add-alert-container"></div>
                     <form id="addStudentForm">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="addFirstName" class="form-label">
                                     <i class="fas fa-user me-2"></i>First Name
                                 </label>
                                 <input type="text" class="form-control" id="addFirstName" name="firstName" placeholder="Enter first name" required>
                             </div>
                             
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label for="addMiddleInitial" class="form-label">
+                                    <i class="fas fa-user me-2"></i>Middle Initial <span class="text-muted">(Optional)</span>
+                                </label>
+                                <input type="text" class="form-control" id="addMiddleInitial" name="middleInitial" placeholder="Enter middle initial" maxlength="1">
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
                                 <label for="addLastName" class="form-label">
                                     <i class="fas fa-user me-2"></i>Last Name
                                 </label>
@@ -142,12 +149,31 @@
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <label for="addGender" class="form-label">
+                                    <i class="fas fa-venus-mars me-2"></i>Gender
+                                </label>
+                                <select class="form-select" id="addGender" name="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
                                 <label for="addCourse" class="form-label">
                                     <i class="fas fa-graduation-cap me-2"></i>Course
                                 </label>
-                                <input type="text" class="form-control" id="addCourse" name="course" placeholder="Enter course name" required>
+                                <select class="form-select" id="addCourse" name="course" required>
+                                    <option value="">Select course</option>
+                                    <option value="BS Information Technology">BS Information Technology</option>
+                                    <option value="BS Information Technology Major in Animation">BS Information Technology Major in Animation</option>
+                                    <option value="BS Computer Science">BS Computer Science</option>
+                                    <option value="BS Information System">BS Information System</option>
+                                </select>
+                            </div>
                             </div>
                             
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="addYear" class="form-label">
                                     <i class="fas fa-calendar-alt me-2"></i>Year Level
@@ -159,17 +185,17 @@
                                     <option value="3">Year 3</option>
                                     <option value="4">Year 4</option>
                                 </select>
-                            </div>
                         </div>
                         
-                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="addBlock" class="form-label">
                                     <i class="fas fa-users me-2"></i>Block
                                 </label>
-                                <input type="text" class="form-control" id="addBlock" name="block" placeholder="Enter block (e.g., 3A, 3B)" required>
+                                <input type="text" class="form-control" id="addBlock" name="block" placeholder="Enter block (e.g., A, B)" required>
+                            </div>
                             </div>
                             
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="addStatus" class="form-label">
                                     <i class="fas fa-info-circle me-2"></i>Status
@@ -215,14 +241,21 @@
                     <form id="updateStudentForm">
                         <input type="hidden" id="updateStudentId" name="id">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="updateFirstName" class="form-label">
                                     <i class="fas fa-user me-2"></i>First Name
                                 </label>
                                 <input type="text" class="form-control" id="updateFirstName" name="firstName" required>
                             </div>
                             
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label for="updateMiddleInitial" class="form-label">
+                                    <i class="fas fa-user me-2"></i>Middle Initial <span class="text-muted">(Optional)</span>
+                                </label>
+                                <input type="text" class="form-control" id="updateMiddleInitial" name="middleInitial" maxlength="1">
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
                                 <label for="updateLastName" class="form-label">
                                     <i class="fas fa-user me-2"></i>Last Name
                                 </label>
@@ -264,12 +297,31 @@
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <label for="updateGender" class="form-label">
+                                    <i class="fas fa-venus-mars me-2"></i>Gender
+                                </label>
+                                <select class="form-select" id="updateGender" name="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
                                 <label for="updateCourse" class="form-label">
                                     <i class="fas fa-graduation-cap me-2"></i>Course
                                 </label>
-                                <input type="text" class="form-control" id="updateCourse" name="course" required>
+                                <select class="form-select" id="updateCourse" name="course" required>
+                                    <option value="">Select course</option>
+                                    <option value="BS Information Technology">BS Information Technology</option>
+                                    <option value="BS Information Technology Major in Animation">BS Information Technology Major in Animation</option>
+                                    <option value="BS Computer Science">BS Computer Science</option>
+                                    <option value="BS Information System">BS Information System</option>
+                                </select>
+                            </div>
                             </div>
                             
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="updateYear" class="form-label">
                                     <i class="fas fa-calendar-alt me-2"></i>Year Level
@@ -281,17 +333,17 @@
                                     <option value="3">Year 3</option>
                                     <option value="4">Year 4</option>
                                 </select>
-                            </div>
                         </div>
                         
-                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="updateBlock" class="form-label">
                                     <i class="fas fa-users me-2"></i>Block
                                 </label>
                                 <input type="text" class="form-control" id="updateBlock" name="block" required>
                             </div>
+                            </div>
                             
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="updateStatus" class="form-label">
                                     <i class="fas fa-info-circle me-2"></i>Status
@@ -342,6 +394,30 @@
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content delete-modal-content">
+                <div class="modal-header delete-modal-header">
+                    <h5 class="modal-title" id="deleteConfirmModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Confirm Deletion
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body delete-modal-body">
+                    <p>Are you sure you want to delete this student record?</p>
+                    <p class="text-muted mb-0">This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer delete-modal-footer">
+                    <button type="button" class="btn btn-cancel-delete" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-confirm-delete" id="confirmDeleteBtn">
+                        <i class="fas fa-trash me-2"></i>Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -352,324 +428,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        let currentUpdateId = null;
-        
-        // Load students on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadStudents();
-            updateCourseFilter();
-            updateStatistics();
-        });
-        
-        // Update statistics
-        function updateStatistics() {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            document.getElementById('totalStudents').textContent = students.length;
-            // For total users, you can set this based on your user management system
-            document.getElementById('totalUsers').textContent = 1; // Default to 1 admin user
-        }
-        
-        // Load and display students
-        function loadStudents() {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const tbody = document.getElementById('studentsTableBody');
-            const emptyState = document.getElementById('emptyState');
-            
-            if (students.length === 0) {
-                tbody.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            tbody.innerHTML = students.map(student => {
-                const courseInfo = `${student.course || 'N/A'} ${student.year || ''}${student.block || ''}`;
-                
-                return `
-                    <tr>
-                        <td class="student-name">${student.firstName || ''} ${student.lastName || ''}</td>
-                        <td class="course-info">${courseInfo}</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-update" onclick="openUpdateModal('${student.id}')">
-                                    Update
-                                </button>
-                                <button class="btn-delete" onclick="deleteStudent('${student.id}')">
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn-view" onclick="viewStudentDetails('${student.id}')">
-                                View
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-            
-            updateStatistics();
-        }
-        
-        // Filter students
-        function filterStudents() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const courseFilter = document.getElementById('courseFilter').value;
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const tbody = document.getElementById('studentsTableBody');
-            const emptyState = document.getElementById('emptyState');
-            
-            let filtered = students.filter(student => {
-                const fullName = `${student.firstName || ''} ${student.lastName || ''}`.toLowerCase();
-                const matchesSearch = !searchTerm || fullName.includes(searchTerm) || 
-                                    (student.studentId && student.studentId.toLowerCase().includes(searchTerm));
-                const matchesCourse = !courseFilter || student.course === courseFilter;
-                return matchesSearch && matchesCourse;
-            });
-            
-            if (filtered.length === 0) {
-                tbody.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            tbody.innerHTML = filtered.map(student => {
-                const courseInfo = `${student.course || 'N/A'} ${student.year || ''}${student.block || ''}`;
-                
-                return `
-                    <tr>
-                        <td class="student-name">${student.firstName || ''} ${student.lastName || ''}</td>
-                        <td class="course-info">${courseInfo}</td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-update" onclick="openUpdateModal('${student.id}')">
-                                    Update
-                                </button>
-                                <button class="btn-delete" onclick="deleteStudent('${student.id}')">
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn-view" onclick="viewStudentDetails('${student.id}')">
-                                View
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
-        
-        // Update course filter dropdown
-        function updateCourseFilter() {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const courses = [...new Set(students.map(s => s.course).filter(Boolean))];
-            const filterSelect = document.getElementById('courseFilter');
-            
-            filterSelect.innerHTML = '<option value="">All Courses</option>' + 
-                courses.map(course => `<option value="${course}">${course}</option>`).join('');
-        }
-        
-        // Add student
-        function submitAddStudent() {
-            const form = document.getElementById('addStudentForm');
-            const formData = new FormData(form);
-            const studentData = {};
-            formData.forEach((value, key) => {
-                studentData[key] = value;
-            });
-            
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            if (students.some(s => s.studentId === studentData.studentId)) {
-                showAlert('add-alert-container', 'Student ID already exists!', 'danger');
-                return;
-            }
-            
-            students.push({
-                id: Date.now(),
-                ...studentData
-            });
-            localStorage.setItem('students', JSON.stringify(students));
-            
-            showAlert('add-alert-container', 'Student record added successfully!', 'success');
-            form.reset();
-            
-            setTimeout(() => {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('addStudentModal'));
-                modal.hide();
-                loadStudents();
-                updateCourseFilter();
-            }, 1500);
-        }
-        
-        // Open update modal
-        function openUpdateModal(studentId) {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const student = students.find(s => s.id == studentId);
-            
-            if (!student) {
-                showAlert('alert-container', 'Student not found.', 'danger');
-                return;
-            }
-            
-            currentUpdateId = student.id;
-            document.getElementById('updateStudentId').value = student.id;
-            document.getElementById('updateStudentIdField').value = student.studentId || '';
-            document.getElementById('updateFirstName').value = student.firstName || '';
-            document.getElementById('updateLastName').value = student.lastName || '';
-            document.getElementById('updateEmail').value = student.email || '';
-            document.getElementById('updatePhone').value = student.phone || '';
-            document.getElementById('updateDateOfBirth').value = student.dateOfBirth || '';
-            document.getElementById('updateCourse').value = student.course || '';
-            document.getElementById('updateYear').value = student.year || '';
-            document.getElementById('updateBlock').value = student.block || '';
-            document.getElementById('updateStatus').value = student.status || 'Regular';
-            document.getElementById('updateAddress').value = student.address || '';
-            
-            const modal = new bootstrap.Modal(document.getElementById('updateStudentModal'));
-            modal.show();
-        }
-        
-        // Submit update
-        function submitUpdateStudent() {
-            if (!currentUpdateId) {
-                showAlert('update-alert-container', 'No student selected for update.', 'warning');
-                return;
-            }
-            
-            const form = document.getElementById('updateStudentForm');
-            const formData = new FormData(form);
-            const updatedData = {};
-            formData.forEach((value, key) => {
-                if (key !== 'id') {
-                    updatedData[key] = value;
-                }
-            });
-            
-            let students = JSON.parse(localStorage.getItem('students') || '[]');
-            const index = students.findIndex(s => s.id === currentUpdateId);
-            
-            if (index !== -1) {
-                students[index] = {
-                    ...students[index],
-                    ...updatedData
-                };
-                localStorage.setItem('students', JSON.stringify(students));
-                showAlert('update-alert-container', 'Student record updated successfully!', 'success');
-                
-                setTimeout(() => {
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('updateStudentModal'));
-                    modal.hide();
-                    loadStudents();
-                    updateCourseFilter();
-                }, 1500);
-            } else {
-                showAlert('update-alert-container', 'Error updating student record.', 'danger');
-            }
-        }
-        
-        // Delete student
-        function deleteStudent(studentId) {
-            if (!confirm('Are you sure you want to delete this student record? This action cannot be undone.')) {
-                return;
-            }
-            
-            let students = JSON.parse(localStorage.getItem('students') || '[]');
-            students = students.filter(s => s.id != studentId);
-            localStorage.setItem('students', JSON.stringify(students));
-            
-            showAlert('alert-container', 'Student record deleted successfully!', 'success');
-            loadStudents();
-            updateCourseFilter();
-        }
-        
-        // View student details
-        function viewStudentDetails(studentId) {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const student = students.find(s => s.id == studentId);
-            
-            if (!student) {
-                showAlert('alert-container', 'Student not found.', 'danger');
-                return;
-            }
-            
-            const detailsContent = document.getElementById('studentDetailsContent');
-            detailsContent.innerHTML = `
-                <div class="student-details">
-                    <h5><i class="fas fa-user-circle me-2"></i>Student Information</h5>
-                    <div class="info-item">
-                        <strong>Student ID:</strong>
-                        <span>${student.studentId || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Name:</strong>
-                        <span>${student.firstName || ''} ${student.lastName || ''}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Email:</strong>
-                        <span>${student.email || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Phone:</strong>
-                        <span>${student.phone || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Date of Birth:</strong>
-                        <span>${student.dateOfBirth || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Course:</strong>
-                        <span>${student.course || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Year Level:</strong>
-                        <span>${student.year ? 'Year ' + student.year : 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Block:</strong>
-                        <span>${student.block || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Status:</strong>
-                        <span>${student.status || 'Regular'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Address:</strong>
-                        <span>${student.address || 'N/A'}</span>
-                    </div>
-                </div>
-            `;
-            
-            const modal = new bootstrap.Modal(document.getElementById('viewStudentModal'));
-            modal.show();
-        }
-        
-        // Utility function
-        function showAlert(containerId, message, type) {
-            const alertContainer = document.getElementById(containerId);
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type}`;
-            
-            const icons = {
-                'success': 'check-circle',
-                'danger': 'exclamation-circle',
-                'warning': 'exclamation-triangle',
-                'info': 'info-circle'
-            };
-            
-            alertDiv.innerHTML = `
-                <i class="fas fa-${icons[type] || 'info-circle'} me-2"></i>
-                ${message}
-            `;
-            alertContainer.innerHTML = '';
-            alertContainer.appendChild(alertDiv);
-            
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 5000);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

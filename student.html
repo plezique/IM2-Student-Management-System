@@ -81,14 +81,21 @@
                     <div id="add-alert-container"></div>
                     <form id="addStudentForm">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="addFirstName" class="form-label">
                                     <i class="fas fa-user me-2"></i>First Name
                                 </label>
                                 <input type="text" class="form-control" id="addFirstName" name="firstName" placeholder="Enter first name" required>
                             </div>
                             
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label for="addMiddleInitial" class="form-label">
+                                    <i class="fas fa-user me-2"></i>Middle Initial <span class="text-muted">(Optional)</span>
+                                </label>
+                                <input type="text" class="form-control" id="addMiddleInitial" name="middleInitial" placeholder="Enter middle initial" maxlength="1">
+                            </div>
+                            
+                            <div class="col-md-4 mb-3">
                                 <label for="addLastName" class="form-label">
                                     <i class="fas fa-user me-2"></i>Last Name
                                 </label>
@@ -130,12 +137,31 @@
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
+                                <label for="addGender" class="form-label">
+                                    <i class="fas fa-venus-mars me-2"></i>Gender
+                                </label>
+                                <select class="form-select" id="addGender" name="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
                                 <label for="addCourse" class="form-label">
                                     <i class="fas fa-graduation-cap me-2"></i>Course
                                 </label>
-                                <input type="text" class="form-control" id="addCourse" name="course" placeholder="Enter course name" required>
+                                <select class="form-select" id="addCourse" name="course" required>
+                                    <option value="">Select course</option>
+                                    <option value="BS Information Technology">BS Information Technology</option>
+                                    <option value="BS Information Technology Major in Animation">BS Information Technology Major in Animation</option>
+                                    <option value="BS Computer Science">BS Computer Science</option>
+                                    <option value="BS Information System">BS Information System</option>
+                                </select>
                             </div>
-                            
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="addYear" class="form-label">
                                     <i class="fas fa-calendar-alt me-2"></i>Year Level
@@ -148,16 +174,16 @@
                                     <option value="4">Year 4</option>
                                 </select>
                             </div>
-                        </div>
-                        
-                        <div class="row">
+                            
                             <div class="col-md-6 mb-3">
                                 <label for="addBlock" class="form-label">
                                     <i class="fas fa-users me-2"></i>Block
                                 </label>
-                                <input type="text" class="form-control" id="addBlock" name="block" placeholder="Enter block (e.g., 3A, 3B)" required>
+                                <input type="text" class="form-control" id="addBlock" name="block" placeholder="Enter block (e.g., A, B)" required>
                             </div>
-                            
+                        </div>
+                        
+                        <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="addStatus" class="form-label">
                                     <i class="fas fa-info-circle me-2"></i>Status
@@ -218,230 +244,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Load students on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadStudents();
-            updateCourseFilter();
-        });
-        
-        // Load and display students
-        function loadStudents() {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const tbody = document.getElementById('studentsTableBody');
-            const emptyState = document.getElementById('emptyState');
-            
-            if (students.length === 0) {
-                tbody.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            tbody.innerHTML = students.map(student => {
-                let statusClass = 'status-regular';
-                if (student.status === 'Graduate') {
-                    statusClass = 'status-graduate';
-                } else if (student.status === 'Irregular') {
-                    statusClass = 'status-irregular';
-                }
-                const courseInfo = `${student.course || 'N/A'} ${student.year || ''}${student.block || ''}`;
-                
-                return `
-                    <tr>
-                        <td class="student-name">${student.firstName || ''} ${student.lastName || ''}</td>
-                        <td class="course-info">${courseInfo}</td>
-                        <td>
-                            <span class="status-badge ${statusClass}">${student.status || 'Regular'}</span>
-                        </td>
-                        <td>
-                            <button class="btn-view" onclick="viewStudentDetails('${student.id}')">
-                                View
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
-        
-        // Filter students
-        function filterStudents() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const courseFilter = document.getElementById('courseFilter').value;
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const tbody = document.getElementById('studentsTableBody');
-            const emptyState = document.getElementById('emptyState');
-            
-            let filtered = students.filter(student => {
-                const fullName = `${student.firstName || ''} ${student.lastName || ''}`.toLowerCase();
-                const matchesSearch = !searchTerm || fullName.includes(searchTerm) || 
-                                    (student.studentId && student.studentId.toLowerCase().includes(searchTerm));
-                const matchesCourse = !courseFilter || student.course === courseFilter;
-                return matchesSearch && matchesCourse;
-            });
-            
-            if (filtered.length === 0) {
-                tbody.innerHTML = '';
-                emptyState.style.display = 'block';
-                return;
-            }
-            
-            emptyState.style.display = 'none';
-            tbody.innerHTML = filtered.map(student => {
-                let statusClass = 'status-regular';
-                if (student.status === 'Graduate') {
-                    statusClass = 'status-graduate';
-                } else if (student.status === 'Irregular') {
-                    statusClass = 'status-irregular';
-                }
-                const courseInfo = `${student.course || 'N/A'} ${student.year || ''}${student.block || ''}`;
-                
-                return `
-                    <tr>
-                        <td class="student-name">${student.firstName || ''} ${student.lastName || ''}</td>
-                        <td class="course-info">${courseInfo}</td>
-                        <td>
-                            <span class="status-badge ${statusClass}">${student.status || 'Regular'}</span>
-                        </td>
-                        <td>
-                            <button class="btn-view" onclick="viewStudentDetails('${student.id}')">
-                                View
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
-        
-        // Update course filter dropdown
-        function updateCourseFilter() {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const courses = [...new Set(students.map(s => s.course).filter(Boolean))];
-            const filterSelect = document.getElementById('courseFilter');
-            
-            // Keep "All Courses" option and add unique courses
-            filterSelect.innerHTML = '<option value="">All Courses</option>' + 
-                courses.map(course => `<option value="${course}">${course}</option>`).join('');
-        }
-        
-        // Add student
-        function submitAddStudent() {
-            const form = document.getElementById('addStudentForm');
-            const formData = new FormData(form);
-            const studentData = {};
-            formData.forEach((value, key) => {
-                studentData[key] = value;
-            });
-            
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            if (students.some(s => s.studentId === studentData.studentId)) {
-                showAlert('add-alert-container', 'Student ID already exists!', 'danger');
-                return;
-            }
-            
-            students.push({
-                id: Date.now(),
-                ...studentData
-            });
-            localStorage.setItem('students', JSON.stringify(students));
-            
-            showAlert('add-alert-container', 'Student record added successfully!', 'success');
-            form.reset();
-            
-            // Close modal after a short delay
-            setTimeout(() => {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('addStudentModal'));
-                modal.hide();
-                loadStudents();
-                updateCourseFilter();
-            }, 1500);
-        }
-        
-        // View student details
-        function viewStudentDetails(studentId) {
-            const students = JSON.parse(localStorage.getItem('students') || '[]');
-            const student = students.find(s => s.id == studentId);
-            
-            if (!student) {
-                showAlert('alert-container', 'Student not found.', 'danger');
-                return;
-            }
-            
-            const detailsContent = document.getElementById('studentDetailsContent');
-            detailsContent.innerHTML = `
-                <div class="student-details">
-                    <h5><i class="fas fa-user-circle me-2"></i>Student Information</h5>
-                    <div class="info-item">
-                        <strong>Student ID:</strong>
-                        <span>${student.studentId || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Name:</strong>
-                        <span>${student.firstName || ''} ${student.lastName || ''}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Email:</strong>
-                        <span>${student.email || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Phone:</strong>
-                        <span>${student.phone || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Date of Birth:</strong>
-                        <span>${student.dateOfBirth || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Course:</strong>
-                        <span>${student.course || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Year Level:</strong>
-                        <span>${student.year ? 'Year ' + student.year : 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Block:</strong>
-                        <span>${student.block || 'N/A'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Status:</strong>
-                        <span>${student.status || 'Regular'}</span>
-                    </div>
-                    <div class="info-item">
-                        <strong>Address:</strong>
-                        <span>${student.address || 'N/A'}</span>
-                    </div>
-                </div>
-            `;
-            
-            const modal = new bootstrap.Modal(document.getElementById('viewStudentModal'));
-            modal.show();
-        }
-        
-        // Utility function
-        function showAlert(containerId, message, type) {
-            const alertContainer = document.getElementById(containerId);
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type}`;
-            
-            const icons = {
-                'success': 'check-circle',
-                'danger': 'exclamation-circle',
-                'warning': 'exclamation-triangle',
-                'info': 'info-circle'
-            };
-            
-            alertDiv.innerHTML = `
-                <i class="fas fa-${icons[type] || 'info-circle'} me-2"></i>
-                ${message}
-            `;
-            alertContainer.innerHTML = '';
-            alertContainer.appendChild(alertDiv);
-            
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 5000);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
