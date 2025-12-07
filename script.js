@@ -175,6 +175,39 @@ function submitAddStudent() {
     const form = document.getElementById('addStudentForm');
     if (!form) return;
     
+    // Get all required field values
+    const firstName = document.getElementById('addFirstName')?.value.trim();
+    const lastName = document.getElementById('addLastName')?.value.trim();
+    const studentId = document.getElementById('addStudentId')?.value.trim();
+    const dateOfBirth = document.getElementById('addDateOfBirth')?.value;
+    const gender = document.getElementById('addGender')?.value;
+    const course = document.getElementById('addCourse')?.value;
+    const year = document.getElementById('addYear')?.value;
+    const block = document.getElementById('addBlock')?.value.trim();
+    const status = document.getElementById('addStatus')?.value;
+    const address = document.getElementById('addAddress')?.value.trim();
+    
+    // Validate all required fields
+    const missingFields = [];
+    
+    if (!firstName) missingFields.push('First Name');
+    if (!lastName) missingFields.push('Last Name');
+    if (!studentId) missingFields.push('Student ID');
+    if (!dateOfBirth) missingFields.push('Date of Birth');
+    if (!gender) missingFields.push('Gender');
+    if (!course) missingFields.push('Course');
+    if (!year) missingFields.push('Year Level');
+    if (!block) missingFields.push('Block');
+    if (!status) missingFields.push('Status');
+    if (!address) missingFields.push('Address');
+    
+    // If any required fields are missing, show error and prevent submission
+    if (missingFields.length > 0) {
+        const errorMessage = `Please fill in all required fields: ${missingFields.join(', ')}`;
+        showAlert('add-alert-container', errorMessage, 'danger');
+        return;
+    }
+    
     const formData = new FormData(form);
     const studentData = {};
     formData.forEach((value, key) => {
@@ -521,6 +554,15 @@ function initHeroStars() {
 
 // Admin page initialization
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevent form submission and use our validation instead
+    const addStudentForm = document.getElementById('addStudentForm');
+    if (addStudentForm) {
+        addStudentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitAddStudent();
+        });
+    }
+    
     // Admin page specific initialization
     if (document.getElementById('studentsTableBody') && document.getElementById('totalStudents')) {
         loadStudents();
