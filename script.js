@@ -168,6 +168,11 @@ function updateCourseFilter() {
     
     filterSelect.innerHTML = '<option value="">All Courses</option>' + 
         courses.map(course => `<option value="${course}">${course}</option>`).join('');
+    
+    // Re-initialize dropdown arrows after updating
+    setTimeout(() => {
+        initDropdownArrows();
+    }, 50);
 }
 
 // Add student
@@ -550,10 +555,83 @@ function initHeroStars() {
     }
 }
 
+// ========== DROPDOWN ARROW ROTATION ==========
+
+// Handle dropdown arrow rotation for all select elements
+function initDropdownArrows() {
+    const selects = document.querySelectorAll('.filter-select, .form-select');
+    
+    selects.forEach(select => {
+        // Skip if already initialized
+        if (select.dataset.arrowInitialized === 'true') {
+            return;
+        }
+        select.dataset.arrowInitialized = 'true';
+        
+        let blurTimeout = null;
+        
+        // Function to clear blur timeout
+        function clearBlurTimeout() {
+            if (blurTimeout) {
+                clearTimeout(blurTimeout);
+                blurTimeout = null;
+            }
+        }
+        
+        // Function to set arrow to open state
+        function setArrowOpen() {
+            clearBlurTimeout();
+            select.classList.add('select-open');
+        }
+        
+        // Function to set arrow to closed state (with delay)
+        function setArrowClosed() {
+            clearBlurTimeout();
+            blurTimeout = setTimeout(() => {
+                // Only close if select doesn't have focus
+                if (document.activeElement !== select) {
+                    select.classList.remove('select-open');
+                }
+            }, 200);
+        }
+        
+        // On mousedown - immediately show arrow up (before any blur can happen)
+        select.addEventListener('mousedown', function(e) {
+            setArrowOpen();
+        }, true); // Use capture phase to run before blur
+        
+        // On focus - show arrow up
+        select.addEventListener('focus', function() {
+            setArrowOpen();
+        });
+        
+        // On blur - hide arrow after delay (allows time for option selection)
+        select.addEventListener('blur', function() {
+            setArrowClosed();
+        });
+        
+        // On click - ensure arrow stays up
+        select.addEventListener('click', function(e) {
+            setArrowOpen();
+        });
+        
+        // On change - close arrow after selection
+        select.addEventListener('change', function() {
+            // Small delay then close
+            setTimeout(() => {
+                setArrowClosed();
+            }, 50);
+        });
+    });
+}
+
 // ========== PAGE INITIALIZATION ==========
 
 // Admin page initialization
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dropdown arrow rotation
+    initDropdownArrows();
+    
     // Prevent form submission and use our validation instead
     const addStudentForm = document.getElementById('addStudentForm');
     if (addStudentForm) {
@@ -569,6 +647,11 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCourseFilter();
         updateStatistics();
         
+        // Re-initialize dropdown arrows after course filter is updated
+        setTimeout(() => {
+            initDropdownArrows();
+        }, 100);
+        
         // Setup delete confirmation button
         const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
         if (confirmDeleteBtn) {
@@ -580,6 +663,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('studentsTableBody') && !document.getElementById('totalStudents')) {
         loadStudentsStudent();
         updateCourseFilter();
+        
+        // Re-initialize dropdown arrows after course filter is updated
+        setTimeout(() => {
+            initDropdownArrows();
+        }, 100);
     }
     
     // Index page specific initialization
