@@ -11,13 +11,13 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="main-header student-header">
+    <header class="main-header student-header" style="animation: headerEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1);">
         <div class="container">
             <div class="header-content">
                 <h1 class="header-title">
                     <span class="brand-accent">Edu</span>Vault 
                 </h1>
-                <div class="user-icon">
+                <div class="user-icon" id="profileIcon" style="cursor: pointer;">
                     <i class="fas fa-user"></i>
                 </div>
             </div>
@@ -25,7 +25,7 @@
     </header>
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="main-content" style="animation: contentEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.05s both;">
         <div class="container">
             <!-- Search and Filter Bar -->
             <div class="search-filter-bar">

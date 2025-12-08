@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduVault | Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  
+</head>
+<body>
+  <div class="login-page">
+    <div class="grid-background"></div>
+
+  <a href="index.html" class="back-button">
+    <i class="fa fa-arrow-left"></i>
+    <span>Back to Home</span>
+  </a>
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="card">
+        <div class="logo-row">
+          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNjE2MTY7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTBhMGE7c3RvcC1vcGFjaXR5OjEiLz48L3JhZGlhbEdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYWNjIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBmZjg4O3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMzNmZjk5O3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTUiIGZpbGw9InVybCgjYmcpIiBzdHJva2U9InVybCgjYWNjKSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjMiIGZpbGw9InVybCgjYWNjKSIgb3BhY2l0eT0iMC45Ii8+PGcgc3Ryb2tlPSJ1cmwoI2FjYykiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMTYgMTMgTDE2IDggTTEzIDE2IEw4IDE2IE0xOSAxNiBMMjQgMTYgTTE2IDE5IEwxNiAyNCIgb3BhY2l0eT0iMC44Ii8+PHBhdGggZD0iTTE4LjUgMTMuNSBMMjIgMTAgTTE4LjUgMTguNSBMMjIgMjIgTTEzLjUgMTMuNSBMMTAgMTAiIG9wYWNpdHk9IjAuNiIvPjwvZz48ZyBmaWxsPSJ1cmwoI2FjYykiIG9wYWNpdHk9IjAuNyI+PGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSIxLjUiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMjQiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiLz48Y2lyY2xlIGN4PSIyMiIgY3k9IjIyIiByPSIxIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIvPjwvZz48L3N2Zz4=" alt="EduVault Logo">
+          <span class="logo-text">
+            <span class="highlight">Edu</span>Vault
+          </span>
+        </div>
+
+        <h1>LOGIN TO YOUR ACCOUNT</h1>
+        <div class="subtitle">Student Management Made Simple</div>
+
+        <form id="loginForm" action="#" method="post">
+          <div class="form-group">
+            <label for="loginEmail">
+              <i class="fa fa-envelope"></i>Email
+            </label>
+            <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">
+              <i class="fa fa-key"></i>Password
+            </label>
+            <div class="input-wrapper">
+              <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required autocomplete="current-password">
+              <span class="input-icon" id="toggleLoginPassword">
+                <i class="fa fa-eye"></i>
+              </span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="loginBtn">
+            <i class="fa fa-sign-in-alt" id="loginIcon"></i>
+            <span id="loginText">Login</span>
+          </button>
+        </form>
+
+        <div class="divider">
+          <hr><span>or</span><hr>
+        </div>
+
+        <!-- Google sign-in removed per request -->
+
+        <div id="loginMessage" class="message"></div>
+
+        <p class="signup-link">
+          Don't have an account?
+          <a href="#" id="openSignup">
+            <i class="fa fa-user-plus"></i> Create account
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <h3>
+        <i class="fa fa-user-plus"></i>Create an Account
+      </h3>
+
+      <div id="signupMessage" class="message"></div>
+
+      <form id="signupForm" action="login.html" method="post">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signupFirstName">
+              <i class="fa fa-user"></i>First Name
+            </label>
+            <input type="text" id="signupFirstName" name="first_name" class="form-control" placeholder="Enter your first name" required autocomplete="given-name">
+          </div>
+          <div class="form-group">
+            <label for="signupMiddleName">
+              <i class="fa fa-user"></i>Middle Name <span style="color: #9ca3af; font-weight: normal; font-size: 0.85rem;">(Optional)</span>
+            </label>
+            <input type="text" id="signupMiddleName" name="middle_name" class="form-control" placeholder="Enter your middle name" autocomplete="additional-name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signupLastName">
+              <i class="fa fa-user"></i>Last Name
+            </label>
+            <input type="text" id="signupLastName" name="last_name" class="form-control" placeholder="Enter your last name" required autocomplete="family-name">
+          </div>
+          <div class="form-group">
+            <label for="signupBirthday">
+
+            </label>
+            <input type="date" id="signupBirthday" name="date_of_birth" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-row full-width">
+          <div class="form-group">
+            <label for="signupEmail">
+              <i class="fa fa-envelope"></i>Email Address
+            </label>
+            <input type="email" id="signupEmail" name="email" class="form-control" placeholder="Enter your email address" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signupPassword">
+              <i class="fa fa-key"></i>Password
+            </label>
+            <div class="input-wrapper">
+              <input type="password" id="signupPassword" name="password" class="form-control" placeholder="Create a secure password" required autocomplete="new-password">
+              <span class="input-icon" id="toggleSignupPassword">
+                <i class="fa fa-eye"></i>
+              </span>
+            </div>
+            <div id="passwordRequirements" class="password-requirements">
+              <div class="requirement" id="req-length"><i class="fa fa-times"></i><span>At least 8 characters</span></div>
+              <div class="requirement" id="req-uppercase"><i class="fa fa-times"></i><span>One uppercase letter</span></div>
+              <div class="requirement" id="req-lowercase"><i class="fa fa-times"></i><span>One lowercase letter</span></div>
+              <div class="requirement" id="req-number"><i class="fa fa-times"></i><span>One number</span></div>
+              <div class="requirement" id="req-special"><i class="fa fa-times"></i><span>One special character</span></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signupConfirmPassword">
+              <i class="fa fa-key"></i>Confirm Password
+            </label>
+            <div class="input-wrapper">
+              <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Re-enter your password" required autocomplete="new-password">
+              <span class="input-icon" id="toggleConfirmPassword">
+                <i class="fa fa-eye"></i>
+              </span>
+            </div>
+            <div id="passwordMatch" class="password-match"></div>
+          </div>
+        </div>
+
+        <div class="form-row full-width" style="margin-top: 1.5rem;">
+          <button type="submit" class="btn btn-primary" id="signupBtn">
+            <i class="fa fa-user-plus" id="signupIcon"></i>
+            <span id="signupText">Create Account</span>
+          </button>
+        </div>
+      </form>
+
+      <button type="button" class="btn btn-secondary" id="closeSignup">
+        <i class="fa fa-times"></i>Cancel
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  </div>
+</body>
+</html>

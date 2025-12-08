@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduVault | Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNjE2MTY7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTBhMGE7c3RvcC1vcGFjaXR5OjEiLz48L3JhZGlhbEdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYWNjIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBmZjg4O3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMzNmZjk5O3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTUiIGZpbGw9InVybCgjYmcpIiBzdHJva2U9InVybCgjYWNjKSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjMiIGZpbGw9InVybCgjYWNjKSIgb3BhY2l0eT0iMC45Ii8+PGcgc3Ryb2tlPSJ1cmwoI2FjYykiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMTYgMTMgTDE2IDggTTEzIDE2IEw4IDE2IE0xOSAxNiBMMjQgMTYgTTE2IDE5IEwxNiAyNCIgb3BhY2l0eT0iMC44Ii8+PHBhdGggZD0iTTE4LjUgMTMuNSBMMjIgMTAgTTE4LjUgMTguNSBMMjIgMjIgTTEzLjUgMTMuNSBMMTAgMTAiIG9wYWNpdHk9IjAuNiIvPjwvZz48ZyBmaWxsPSJ1cmwoI2FjYykiIG9wYWNpdHk9IjAuNyI+PGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSIxLjUiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMjQiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiLz48Y2lyY2xlIGN4PSIyMiIgY3k9IjIyIiByPSIxIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIvPjwvZz48L3N2Zz4=">
+</head>
+<body>
+  <div class="profile-page" style="animation: pageEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
+    <div class="grid-background"></div>
+
+    <div class="header" style="animation: headerEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+    <a href="student.html" class="back-button">
+      <i class="fa fa-arrow-left"></i>
+      <span>Back to Dashboard</span>
+    </a>
+    <button class="logout-button" id="logoutBtn">
+      <i class="fa fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="card" style="animation: contentEnter 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;">
+        <div id="profileMessage" class="message"></div>
+
+        <div class="profile-header">
+          <div class="profile-photo-wrapper">
+            <div class="profile-photo" id="profilePhoto">
+              <i class="fa fa-user"></i>
+            </div>
+            <label for="photoInput" class="photo-upload-overlay">
+              <i class="fa fa-camera"></i>
+            </label>
+            <input type="file" id="photoInput" accept="image/*">
+          </div>
+          <h1 class="profile-name" id="profileName">John Michael Doe</h1>
+          <p class="profile-email" id="profileEmail">john.doe@example.com</p>
+        </div>
+
+        <div class="profile-details">
+          <div class="detail-row">
+            <div class="detail-group">
+              <div class="detail-label">
+                <i class="fa fa-user"></i>
+                First Name
+              </div>
+              <div class="detail-value" id="firstName">John</div>
+            </div>
+            <div class="detail-group">
+              <div class="detail-label">
+                <i class="fa fa-user"></i>
+                Middle Name
+              </div>
+              <div class="detail-value" id="middleName">Michael</div>
+            </div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">
+              <i class="fa fa-user"></i>
+              Last Name
+            </div>
+            <div class="detail-value" id="lastName">Doe</div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">
+              <i class="fa fa-calendar"></i>
+              Date of Birth
+            </div>
+            <div class="detail-value" id="dateOfBirth">January 15, 1995</div>
+          </div>
+
+          <div class="detail-group">
+            <div class="detail-label">
+              <i class="fa fa-envelope"></i>
+              Email Address
+            </div>
+            <div class="detail-value" id="emailAddress">john.doe@example.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <i class="fa fa-sign-out-alt"></i>
+      </div>
+      <h3>Confirm Logout</h3>
+      <p>Are you sure you want to log out of your account? You'll need to log in again to access your dashboard.</p>
+      <div class="modal-buttons">
+        <button class="btn btn-cancel" id="cancelLogout">
+          <i class="fa fa-times"></i>
+          Cancel
+        </button>
+        <button class="btn btn-confirm" id="confirmLogout">
+          <i class="fa fa-sign-out-alt"></i>
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
+  <script src="script.js"></script>
+  </div>
+</body>
+</html>

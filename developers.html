@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers - EduVault</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnIiBjeD0iNTAlIiBjeT0iNTAlIiByPSI1MCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNjE2MTY7c3RvcC1vcGFjaXR5OjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwYTBhMGE7c3RvcC1vcGFjaXR5OjEiLz48L3JhZGlhbEdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iYWNjIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBmZjg4O3N0b3Atb3BhY2l0eToxIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMzNmZjk5O3N0b3Atb3BhY2l0eToxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTUiIGZpbGw9InVybCgjYmcpIiBzdHJva2U9InVybCgjYWNjKSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjMiIGZpbGw9InVybCgjYWNjKSIgb3BhY2l0eT0iMC45Ii8+PGcgc3Ryb2tlPSJ1cmwoI2FjYykiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMTYgMTMgTDE2IDggTTEzIDE2IEw4IDE2IE0xOSAxNiBMMjQgMTYgTTE2IDE5IEwxNiAyNCIgb3BhY2l0eT0iMC44Ii8+PHBhdGggZD0iTTE4LjUgMTMuNSBMMjIgMTAgTTE4LjUgMTguNSBMMjIgMjIgTTEzLjUgMTMuNSBMMTAgMTAiIG9wYWNpdHk9IjAuNiIvPjwvZz48ZyBmaWxsPSJ1cmwoI2FjYykiIG9wYWNpdHk9IjAuNyI+PGNpcmNsZSBjeD0iMTYiIGN5PSI4IiByPSIxLjUiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjI0IiBjeT0iMTYiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE2IiBjeT0iMjQiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjIyIiBjeT0iMTAiIHI9IjEiLz48Y2lyY2xlIGN4PSIyMiIgY3k9IjIyIiByPSIxIi8+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMSIvPjwvZz48L3N2Zz4=">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .developers-page {
+            min-height: 100vh;
+            background: #0a0a0a;
+        }
+
+        .developers-header {
+            background: rgba(0, 255, 136, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .developers-content {
+            padding: 3rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .developers-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .developers-subtitle {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .developers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .developer-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .developer-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .developer-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid rgba(0, 255, 136, 0.3);
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+        }
+
+        .developer-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .developer-course {
+            font-size: 1rem;
+            color: #00ff88;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-block {
+            font-size: 0.95rem;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .developers-title {
+                font-size: 2rem;
+            }
+
+            .developers-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .developer-card {
+                padding: 1.5rem;
+            }
+
+            .developer-photo {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body class="developers-page">
+    <!-- Header -->
+    <header class="developers-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <span class="brand-accent">Edu</span>Vault Developers
+                </h1>
+                <div class="header-actions">
+                    <a href="admin.html" class="btn-logout" style="background: rgba(0, 255, 136, 0.15); border-color: rgba(0, 255, 136, 0.4); color: #00ff88;">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="developers-content">
+        <div class="container">
+            <h2 class="developers-title">Development Team</h2>
+            <p class="developers-subtitle">Meet the talented developers behind EduVault</p>
+            
+            <div class="developers-grid">
+                <!-- Developer 1 -->
+                <div class="developer-card">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&size=150&background=00ff88&color=0a0a0a&bold=true" alt="John Doe" class="developer-photo">
+                    <h3 class="developer-name">John Doe</h3>
+                    <p class="developer-course">BS Information Technology</p>
+                    <p class="developer-block">Block A</p>
+                </div>
+
+                <!-- Developer 2 -->
+                <div class="developer-card">
+                    <img src="https://ui-avatars.com/api/?name=Jane+Smith&size=150&background=00ff88&color=0a0a0a&bold=true" alt="Jane Smith" class="developer-photo">
+                    <h3 class="developer-name">Jane Smith</h3>
+                    <p class="developer-course">BS Computer Science</p>
+                    <p class="developer-block">Block B</p>
+                </div>
+
+                <!-- Developer 3 -->
+                <div class="developer-card">
+                    <img src="https://ui-avatars.com/api/?name=Michael+Johnson&size=150&background=00ff88&color=0a0a0a&bold=true" alt="Michael Johnson" class="developer-photo">
+                    <h3 class="developer-name">Michael Johnson</h3>
+                    <p class="developer-course">BS Information System</p>
+                    <p class="developer-block">Block C</p>
+                </div>
+
+                <!-- Developer 4 -->
+                <div class="developer-card">
+                    <img src="https://ui-avatars.com/api/?name=Sarah+Williams&size=150&background=00ff88&color=0a0a0a&bold=true" alt="Sarah Williams" class="developer-photo">
+                    <h3 class="developer-name">Sarah Williams</h3>
+                    <p class="developer-course">BS Information Technology Major in Animation</p>
+                    <p class="developer-block">Block A</p>
+                </div>
+
+                <!-- Developer 5 -->
+                <div class="developer-card">
+                    <img src="https://ui-avatars.com/api/?name=David+Brown&size=150&background=00ff88&color=0a0a0a&bold=true" alt="David Brown" class="developer-photo">
+                    <h3 class="developer-name">David Brown</h3>
+                    <p class="developer-course">BS Information Technology</p>
+                    <p class="developer-block">Block D</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2025 EduVault. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

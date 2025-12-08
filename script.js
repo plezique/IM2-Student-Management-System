@@ -2,6 +2,17 @@
 let currentUpdateId = null;
 let currentDeleteId = null;
 
+// ========== PAGE INITIALIZATION ==========
+// Add profile icon click handler
+document.addEventListener('DOMContentLoaded', function() {
+    const profileIcon = document.getElementById('profileIcon');
+    if (profileIcon) {
+        profileIcon.addEventListener('click', function() {
+            window.location.href = 'profile.html';
+        });
+    }
+});
+
 // ========== COMMON/UTILITY FUNCTIONS ==========
 
 // Utility function for showing alerts
@@ -555,6 +566,36 @@ function initHeroStars() {
     }
 }
 
+// Initialize scroll-triggered reveal animations for elements with `.animate-on-scroll`
+function initScrollAnimations() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    if (!elements || elements.length === 0) return;
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        elements.forEach(el => observer.observe(el));
+    } else {
+        // Fallback for older browsers: reveal on load and on scroll
+        const revealOnScroll = () => {
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) el.classList.add('is-visible');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll, { passive: true });
+        // Run once immediately
+        revealOnScroll();
+    }
+}
+
 // ========== DROPDOWN ARROW ROTATION ==========
 
 // Handle dropdown arrow rotation for all select elements
@@ -657,6 +698,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (confirmDeleteBtn) {
             confirmDeleteBtn.addEventListener('click', confirmDelete);
         }
+
+        // Admin logout confirmation
+        const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+        if (confirmLogoutBtn) {
+            confirmLogoutBtn.addEventListener('click', () => {
+                window.location.href = 'login.html';
+            });
+        }
+
     }
     
     // Student page specific initialization
@@ -673,6 +723,410 @@ document.addEventListener('DOMContentLoaded', function() {
     // Index page specific initialization
     if (document.getElementById('hero-section')) {
         initHeroStars();
+        initScrollAnimations();
     }
 });
 
+// ========== PROFILE PAGE SCRIPTS (moved from profile.html, scoped) ==========
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.querySelector('.profile-page')) return;
+
+    // Initialize small decorative stars for profile page
+    (function initProfileStars() {
+        for (let i = 0; i < 25; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 4 + 2;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            document.body.appendChild(star);
+        }
+    })();
+
+    // Photo upload functionality
+    const photoInputEl = document.getElementById('photoInput');
+    const profilePhotoEl = document.getElementById('profilePhoto');
+
+    if (photoInputEl && profilePhotoEl) {
+        photoInputEl.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    profilePhotoEl.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '50%';
+                    profilePhotoEl.appendChild(img);
+
+                    // Show success message
+                    showProfileMessage('Profile photo updated successfully!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Logout modal functionality
+    const logoutBtnEl = document.getElementById('logoutBtn');
+    const logoutModalEl = document.getElementById('logoutModal');
+    const cancelLogoutEl = document.getElementById('cancelLogout');
+    const confirmLogoutEl = document.getElementById('confirmLogout');
+
+    if (logoutBtnEl && logoutModalEl && cancelLogoutEl && confirmLogoutEl) {
+        logoutBtnEl.addEventListener('click', () => {
+            logoutModalEl.classList.add('active');
+        });
+
+        cancelLogoutEl.addEventListener('click', () => {
+            logoutModalEl.classList.remove('active');
+        });
+
+        confirmLogoutEl.addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+
+        // Close modal on outside click
+        logoutModalEl.addEventListener('click', (e) => {
+            if (e.target === logoutModalEl) {
+                logoutModalEl.classList.remove('active');
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && logoutModalEl.classList.contains('active')) {
+                logoutModalEl.classList.remove('active');
+            }
+        });
+    }
+
+    // Profile message helper (scoped)
+    function showProfileMessage(message, type) {
+        const messageEl = document.getElementById('profileMessage');
+        if (!messageEl) return;
+        messageEl.textContent = message;
+        messageEl.className = `message ${type} show`;
+        setTimeout(() => {
+            messageEl.classList.remove('show');
+        }, 3000);
+    }
+
+    // Load placeholder user data (replace with backend values as needed)
+    function loadProfileUserData() {
+        const userData = {
+            firstName: 'John',
+            middleName: 'Michael',
+            lastName: 'Doe',
+            dateOfBirth: 'January 15, 1995',
+            email: 'john.doe@example.com'
+        };
+
+        const elFirst = document.getElementById('firstName');
+        if (elFirst) elFirst.textContent = userData.firstName;
+
+        const elMiddle = document.getElementById('middleName');
+        if (elMiddle) elMiddle.textContent = userData.middleName || 'N/A';
+
+        const elLast = document.getElementById('lastName');
+        if (elLast) elLast.textContent = userData.lastName;
+
+        const elDob = document.getElementById('dateOfBirth');
+        if (elDob) elDob.textContent = userData.dateOfBirth;
+
+        const elEmail = document.getElementById('emailAddress');
+        if (elEmail) elEmail.textContent = userData.email;
+
+        const elProfileEmail = document.getElementById('profileEmail');
+        if (elProfileEmail) elProfileEmail.textContent = userData.email;
+
+        const elProfileName = document.getElementById('profileName');
+        if (elProfileName) {
+            const fullName = [userData.firstName, userData.middleName, userData.lastName]
+                .filter(Boolean)
+                .join(' ');
+            elProfileName.textContent = fullName;
+        }
+    }
+
+    // Initialize profile data
+    loadProfileUserData();
+});
+
+// ========== LOGIN PAGE SCRIPTS (moved from login.html, scoped) ==========
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.querySelector('.login-page')) return;
+
+    // Stars background for login page
+    (function initLoginStars(){
+        for (let i = 0; i < 25; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 4 + 2;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(star);
+        }
+    })();
+
+    // Toggle password visibility helper
+    const togglePassword = (input, toggle) => {
+        if (!input || !toggle) return;
+        toggle.addEventListener('click', () => {
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
+            const icon = toggle.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-eye', type === 'password');
+                icon.classList.toggle('fa-eye-slash', type !== 'password');
+            } else {
+                toggle.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
+            }
+        });
+    };
+
+    togglePassword(document.getElementById('loginPassword'), document.getElementById('toggleLoginPassword'));
+    togglePassword(document.getElementById('signupPassword'), document.getElementById('toggleSignupPassword'));
+    togglePassword(document.getElementById('signupConfirmPassword'), document.getElementById('toggleConfirmPassword'));
+
+    // Password validation for signup
+    const validatePassword = (password) => {
+        const requirements = {
+            length: password.length >= 8,
+            uppercase: /[A-Z]/.test(password),
+            lowercase: /[a-z]/.test(password),
+            number: /[0-9]/.test(password),
+            special: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>\/?]/.test(password)
+        };
+
+        const reqElements = {
+            length: document.getElementById('req-length'),
+            uppercase: document.getElementById('req-uppercase'),
+            lowercase: document.getElementById('req-lowercase'),
+            number: document.getElementById('req-number'),
+            special: document.getElementById('req-special')
+        };
+
+        Object.keys(requirements).forEach(key => {
+            const element = reqElements[key];
+            if (element) {
+                const isValid = requirements[key];
+                element.classList.toggle('valid', isValid);
+                element.classList.toggle('invalid', !isValid);
+                const icon = element.querySelector('i');
+                if (icon) icon.className = isValid ? 'fa fa-check' : 'fa fa-times';
+            }
+        });
+
+        return Object.values(requirements).every(req => req === true);
+    };
+
+    const checkPasswordMatch = () => {
+        const password = document.getElementById('signupPassword')?.value || '';
+        const confirmPassword = document.getElementById('signupConfirmPassword')?.value || '';
+        const matchElement = document.getElementById('passwordMatch');
+
+        if (!matchElement) return false;
+
+        if (!confirmPassword) {
+            matchElement.textContent = '';
+            matchElement.className = 'password-match';
+            return false;
+        }
+
+        const isMatch = password === confirmPassword;
+        matchElement.textContent = isMatch ? '✓ Passwords match' : '✗ Passwords do not match';
+        matchElement.className = `password-match ${isMatch ? 'match' : 'no-match'}`;
+        return isMatch;
+    };
+
+    const signupPasswordEl = document.getElementById('signupPassword');
+    const signupConfirmEl = document.getElementById('signupConfirmPassword');
+    if (signupPasswordEl) {
+        signupPasswordEl.addEventListener('input', (e) => {
+            validatePassword(e.target.value);
+            if (signupConfirmEl && signupConfirmEl.value) checkPasswordMatch();
+        });
+    }
+    if (signupConfirmEl) signupConfirmEl.addEventListener('input', checkPasswordMatch);
+
+    const resetSignupForm = () => {
+        const form = document.getElementById('signupForm');
+        if (form) form.reset();
+        document.querySelectorAll('.requirement').forEach(req => {
+            req.classList.remove('valid', 'invalid');
+            const icon = req.querySelector('i'); if (icon) icon.className = 'fa fa-times';
+        });
+        const matchEl = document.getElementById('passwordMatch');
+        if (matchEl) { matchEl.textContent = ''; matchEl.className = 'password-match'; }
+    };
+
+    const setButtonLoading = (btn, icon, text, isLoading, loadingText, loadingIcon) => {
+        if (!btn || !icon || !text) return;
+        btn.classList.toggle('loading', isLoading);
+        if (isLoading) {
+            icon.className = loadingIcon;
+            text.dataset.original = text.textContent;
+            text.textContent = loadingText;
+        } else {
+            if (text.dataset.original) text.textContent = text.dataset.original;
+        }
+    };
+
+    const showError = (parent, message) => {
+        if (!parent) return;
+        const existing = parent.querySelector('.error-message');
+        if (existing) existing.remove();
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message show';
+        errorMsg.textContent = message;
+        errorMsg.style.marginTop = '0.5rem';
+        parent.appendChild(errorMsg);
+        setTimeout(() => errorMsg.remove(), 3000);
+    };
+
+    // Signup modal controls
+    const signupModal = document.getElementById('signupModal');
+    const openSignupBtn = document.getElementById('openSignup');
+    const closeSignupBtn = document.getElementById('closeSignup');
+
+    if (openSignupBtn && signupModal) {
+        openSignupBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.classList.add('active');
+            const birthdayInput = document.getElementById('signupBirthday');
+            if (birthdayInput) {
+                const today = new Date();
+                birthdayInput.max = new Date(today.getFullYear() - 13, today.getMonth(), today.getDate()).toISOString().split('T')[0];
+                birthdayInput.min = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate()).toISOString().split('T')[0];
+            }
+            const first = document.getElementById('signupFirstName'); if (first) first.focus();
+        });
+    }
+
+    const closeModal = () => { if (signupModal) { signupModal.classList.remove('active'); resetSignupForm(); } };
+    if (closeSignupBtn) closeSignupBtn.addEventListener('click', closeModal);
+    if (signupModal) signupModal.addEventListener('click', (e) => { if (e.target === signupModal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && signupModal && signupModal.classList.contains('active')) closeModal(); });
+
+    // Scoped message helpers
+    const showMessage = (elementId, message, type) => {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        el.textContent = message;
+        el.className = `message ${type} show`;
+    };
+
+    const hideMessage = (elementId) => {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        el.className = 'message';
+    };
+
+    // Login form submit
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            const email = document.getElementById('loginEmail')?.value || '';
+            const password = document.getElementById('loginPassword')?.value || '';
+            const loginBtn = document.getElementById('loginBtn');
+            const loginIcon = document.getElementById('loginIcon');
+            const loginText = document.getElementById('loginText');
+
+            if (!email || !password) {
+                e.preventDefault();
+                showError(loginBtn?.parentElement || document.body, 'Please fill in all fields');
+                return;
+            }
+
+            const existingError = loginBtn?.parentElement.querySelector('.error-message'); if (existingError) existingError.remove();
+
+            // TEMP: front-end only admin shortcut for UI testing (remove when backend auth is live)
+            const tempAdminEmail = 'admin@gmail.com';
+            const tempAdminPassword = 'admin123';
+            if (email.trim().toLowerCase() === tempAdminEmail && password === tempAdminPassword) {
+                e.preventDefault();
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // Block backend calls during UI-only phase
+            e.preventDefault();
+            showMessage('loginMessage', 'Backend login is not wired yet. Use the admin test account above for UI checks.', 'error');
+        });
+    }
+
+    // Signup form submit
+    const signupForm = document.getElementById('signupForm');
+    if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+            const firstName = document.getElementById('signupFirstName')?.value.trim() || '';
+            const middleName = document.getElementById('signupMiddleName')?.value.trim() || '';
+            const lastName = document.getElementById('signupLastName')?.value.trim() || '';
+            const birthday = document.getElementById('signupBirthday')?.value || '';
+            const email = document.getElementById('signupEmail')?.value.trim() || '';
+            const password = document.getElementById('signupPassword')?.value || '';
+            const confirmPassword = document.getElementById('signupConfirmPassword')?.value || '';
+            const signupBtn = document.getElementById('signupBtn');
+            const signupIcon = document.getElementById('signupIcon');
+            const signupText = document.getElementById('signupText');
+
+            if (!firstName || !lastName || !birthday || !email || !password || !confirmPassword) {
+                e.preventDefault();
+                showMessage('signupMessage', 'Please fill in all required fields', 'error');
+                return;
+            }
+
+            const birthDate = new Date(birthday);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()) ? age - 1 : age;
+
+            if (actualAge < 13) {
+                e.preventDefault();
+                showMessage('signupMessage', 'You must be at least 13 years old to create an account', 'error');
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                e.preventDefault();
+                showMessage('signupMessage', 'Password does not meet all requirements', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                showMessage('signupMessage', 'Passwords do not match', 'error');
+                return;
+            }
+
+            // show loading state and let form submit to server-side
+            if (signupBtn) signupBtn.classList.add('loading');
+            if (signupIcon) signupIcon.className = 'fa fa-spinner fa-spin';
+            if (signupText) signupText.textContent = 'Creating account...';
+        });
+    }
+
+    // On load, fetch any flash messages from server (set by PHP handlers)
+    (async function fetchFlash() {
+        try {
+            const res = await fetch('flash.php');
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data.error) showMessage('loginMessage', data.error, 'error');
+            if (data.success) showMessage('loginMessage', data.success, 'success');
+        } catch (e) {
+            // ignore silently
+        }
+    })();
+});
